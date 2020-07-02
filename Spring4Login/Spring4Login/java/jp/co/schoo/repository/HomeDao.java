@@ -23,9 +23,18 @@ public class HomeDao {
 	/** ユーザ検索用のSQL文 */
 	private final String SELECT_USER_QUERY =
 			"select name, age from user where id = ? and pass = ?";
-	//ユーザー検索(ID,password)
+
+	/**
+	 * ユーザ検索処理.
+	 * @param id		ログインユーザID
+	 * @param password	ログインパスワード
+	 * @return	ユーザ画面用のModelクラス
+	 */
+	//ユーザー検索(ID,passwordを用いて)
 	private final String INSERT_USER_QUERY =
 			"insert into user(id, pass, name, age) values(? , ?, ?, ?)";
+
+
 	//ユーザー検索(IDのみ)
 	private final String ID_USER_QUERY =
 			"select name, age from user where id = ?";
@@ -34,13 +43,8 @@ public class HomeDao {
 
 
 	/**
-	 * ユーザ検索処理.
-	 * @param id		ログインユーザID
-	 * @param password	ログインパスワード
-	 * @return	ユーザ画面用のModelクラス
+	 * idとパスワードでユーザ検索
 	 */
-
-
 	public HomeOutputModel selectUser(String id, String password) {
 
 		List<Map<String, Object>> list = null;	// DB検索結果を格納するリスト
@@ -57,7 +61,7 @@ public class HomeDao {
 				outputModel = new HomeOutputModel();
 
 				for(Map<String, Object> map : list) {
-
+					// for文で回してmapにid,name,age（リストの中身)をセットしていく。
 					outputModel.setId(id);
 					outputModel.setName((String)map.get("name"));
 					outputModel.setAge((Integer)map.get("age"));
@@ -73,21 +77,15 @@ public class HomeDao {
 	}
 
 
+	/**
+	 * 新規ユーザ登録
+	 */
 	public InsertOutputModel insertUser(String id, String password, String name, String age) {
 
 
-//		List<Map<String, Object>> list = null;
 		InsertOutputModel insertoutputModel = null;
 
-
-		// ユーザ検索処理を実行
-//		list = data.queryForList(SELECT_USER_QUERY, new Object[]{id, password});
-	try {
-	//	 検索結果が空でなければ
-	//	if(!list.isEmpty()) {
-		//	return insertoutputModel;
-		//}
-
+		try {
 			insertoutputModel = new InsertOutputModel();
 			insertoutputModel.setId(id);
 			insertoutputModel.setPassword(password);
@@ -101,11 +99,13 @@ public class HomeDao {
 		data.update(INSERT_USER_QUERY,  new Object[]{id, password, name, Integer.parseInt(age)});
 		System.out.println("■■■■■isnert実行後■■：" + data.toString());
 
-	return insertoutputModel;
+		return insertoutputModel;
 	}
 
 
-
+	/**
+	 * 新規ユーザ登録でidとパスワードが同じユーザが存在しないかをチェックするメソッド
+	 */
 	public InsertOutputModel insertselectUser(String id, String password) {
 
 		List<Map<String, Object>> list = null;	// DB検索結果を格納するリスト
@@ -116,10 +116,10 @@ public class HomeDao {
 			list = data.queryForList(SELECT_USER_QUERY, new Object[]{id, password});
 
 			// 検索結果が空でないことをチェック
-		if(!list.isEmpty()) {
+			if(!list.isEmpty()) {
 
-			// Modelクラスのインスタンスを生成して検索結果の情報をセット
-			insertoutputModel = new InsertOutputModel();
+				// Modelクラスのインスタンスを生成して検索結果の情報をセット
+				insertoutputModel = new InsertOutputModel();
 
 				for(Map<String, Object> map : list) {
 
@@ -140,7 +140,9 @@ public class HomeDao {
 
 		return insertoutputModel;
 	}
-
+	/**
+	 * 新規ユーザ登録で既に既存のidが登録されていないかをチェックするメソッド
+	 */
 	public InsertOutputModel insertselectId(String id) {
 
 		List<Map<String, Object>> list = null;	// DB検索結果を格納するリスト
@@ -151,14 +153,14 @@ public class HomeDao {
 			list = data.queryForList(ID_USER_QUERY, new Object[]{id});
 
 			// 検索結果が空でないことをチェック
-		if(!list.isEmpty()) {
+			if(!list.isEmpty()) {
 
-			// Modelクラスのインスタンスを生成して検索結果の情報をセット
-			insertoutputModel = new InsertOutputModel();
+				// Modelクラスのインスタンスを生成して検索結果の情報をセット
+				insertoutputModel = new InsertOutputModel();
 
 
 
-					insertoutputModel.setId(id);
+				insertoutputModel.setId(id);
 
 
 			}

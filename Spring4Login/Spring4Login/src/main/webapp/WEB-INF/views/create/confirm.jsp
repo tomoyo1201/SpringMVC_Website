@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%-- Java入門 購入画面 --%>
+<%-- Java入門 購入確認画面 --%>
 <!DOCTYPE html>
 <head>
 <title>購入確認</title>
@@ -12,7 +12,6 @@
 	<div class="login_pane">
 		<h1>購入確認</h1>
 		<p>つぎの商品を購入しますか？</p>
-		<%-- リクエストスコープからBeanクラスの配列を取得（eclipseの警告が出ても今回は大丈夫です） --%>
 		<table class="table_list">
 			<tbody>
 				<tr>
@@ -25,22 +24,16 @@
 				<c:forEach var="data" items="${input}" varStatus="st">
 					<tr>
 						<!--商品ID  -->
-
 						<td>${data.item_id}</td>
-						<td>${data.item_name}</td>
-						<td>${data.price}</td>
-						<td>${data.quantity}</td>
-						<td>${quantity}</td>
-						<%-- 						<td><%= request.getAttribute("quantity") %></td> --%>
-
 						<!--商品名  -->
-						<%-- 	<td>${create.item_name}</td>
-						<!--商品価格  -->
-						<td>${create.price}</td>
-						<!--商品在庫  -->
-						<td>${create.quantity}</td> --%>
-
-
+						<td>${data.item_name}</td>
+						<!--価格 -->
+						<td>${data.price}</td>
+						<!--在庫数 -->
+						<td>${data.quantity}</td>
+						<!--数量  -->
+						<td>${quantity}</td>
+						<!--購入処理を行えるボタンの実装  -->
 						<td class="button">
 							<form action="Result" method="POST">
 								<input class="common_button" type="submit" value="confirm"

@@ -3,6 +3,11 @@ package jp.co.schoo.model;
 import java.io.Serializable;
 
 /**
+ * @author Tomoyo.H
+ *
+ */
+
+/**
  * Java入門 ログイン画面Modelクラス.
  */
 public class HomeOutputModel implements Serializable {

@@ -7,14 +7,12 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%-- Java入門 ヘッダー画面 --%>
 <div align="right">
-	<%-- ログイン済みの場合はIDを表示 --%>
+
 
 	<f:form method="POST" action="create" modelAttribute="create">
 		<h3>
-			ようこそ
-			<c:out value="${sessionScope.user_db.id}" />
-			<%-- % request.getAttribute("user_db"); %> --%>
-			さん！
+			<%-- ログイン済みの場合はIDを表示 --%>
+			ようこそ<c:out value="${sessionScope.user_db.id}" />さん！
 		</h3>
 		<%-- 	 --%>
 		<%

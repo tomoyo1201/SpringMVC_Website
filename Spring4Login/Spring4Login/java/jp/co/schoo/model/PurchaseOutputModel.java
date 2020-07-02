@@ -1,5 +1,12 @@
 package jp.co.schoo.model;
+/**
+ * @author Tomoyo.H
+ *
+ */
 
+/**
+ * Java入門 購入処理画面Modelクラス.
+ */
 public class PurchaseOutputModel {
 
 	private static final long serialVersionUID = 1L;

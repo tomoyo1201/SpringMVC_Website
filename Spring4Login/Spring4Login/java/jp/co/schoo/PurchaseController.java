@@ -30,25 +30,21 @@ public class PurchaseController {
 	@Autowired
 	PurchaseDao dao;	// DAOクラス
 
-
+	/**
+	 * アイテム購入画面に移る際の直前の処理
+	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(@ModelAttribute PurchaseOutputModel purchase, Model model,
 			HttpServletRequest request, HttpServletResponse response) {
 
 		String nextpage = "/create/input";	// 戻り値（次画面を示す文字列）
-
-
-
+		//購入画面用modelクラスのインスタンス化
 		PurchaseInputModel pr= new PurchaseInputModel();
-
-
-
-
+		//モデルにセット
 		model.addAttribute("pr", pr);
-
+		//購入できるアイテムを表示させるためにリストに格納
 		List<Map<String, Object>> itemList = dao.itemList();
-
-
+		//outputオブジェクトにこのリストをセットする
 		model.addAttribute("output", itemList);
 
 
@@ -59,39 +55,37 @@ public class PurchaseController {
 
 
 
-
+	/**
+	 * 購入確認画面に移る際の処理
+	 */
     @RequestMapping(value ="Confirm", method = RequestMethod.POST)
     public String confirm(@ModelAttribute PurchaseInputModel purchase, Model model,
 			HttpServletRequest request, HttpSession session) throws SQLException {
 
 
 
-
+    	//購入確認画面用modelクラスのインスタンス化
 		PurchaseInputModel pr= new PurchaseInputModel();
-		System.out.println(pr);
+
 		String nextpage = "/create/confirm";
-
+		//コンソールで値がとれているかを見る
 		System.out.println(pr.getItemId()+"list");
-
-	     Enumeration<String> names = request.getParameterNames();
+		// GETメソッドのパラメータ名を取得
+	    Enumeration<String> names = request.getParameterNames();
 
 
 
 			String name  = "";		// 現在のパラメータ名
 			String itemId= "";		// 商品ID
 			String quantity= "";	// 購入数
-			String bean ="";
 
-
-
-
-
+			// 購入ボタンがクリックされた場所を特定
 	        while (names.hasMoreElements()) {
 
 	            // 渡ってきたパラメータを順番に処理
 	            // パラメータ名を取得
 	            name = names.nextElement();
-
+	            //ボタンの名前を取得してtempに代入
 	            String temp = request.getParameter(name);
 
 	            // 購入ボタンがクリックされている場合は「購入」のパラメータが取得できる
@@ -101,27 +95,15 @@ public class PurchaseController {
 	                itemId = name;
 	            }
 	        }
-
-
-	// ここからの続きはservletのサンプルソースのBuyItemServlet.javaを参考にして実装。
-
+	        //購入数の値を取得
 			quantity = request.getParameter(itemId + "list");
-
-//			pr.setQuantity(pr.getQuantity());
-
 			request.setAttribute("quantity", quantity);
-
+			//購入するアイテムの情報を取得
 			List<Map<String, Object>> itemList = dao.selectItem(itemId);
 
 			model.addAttribute("pr", pr);
 
 			model.addAttribute("input", itemList);
-
-
-		// GETメソッドのパラメータ名を取得
-
-
-
 
         return nextpage;
     }

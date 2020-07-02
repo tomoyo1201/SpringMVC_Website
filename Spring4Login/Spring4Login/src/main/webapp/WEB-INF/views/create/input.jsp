@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 
-<%-- Java入門 購入画面 --%>
+<%-- Java入門 購入数入力画面 --%>
 <!DOCTYPE html>
 <head>
 <title>購入画面</title>
@@ -12,8 +12,7 @@
 	<%@ include file="/WEB-INF/views/create/header.jsp"%>
 	<div class="login_pane">
 		<h1>ようこそショッピング風サイトへ</h1>
-			<%-- <% ArrayList<PurchaseInputModel> itemList = (ArrayList<PurchaseInputModel>)request.getAttribute("data"); %> --%>
-		<%-- リクエストスコープからBeanクラスの配列を取得（eclipseの警告が出ても今回は大丈夫です） --%>
+
 		<f:form action="Confirm" method="POST" modelAttribute="pr">
 			<table class="table_list">
 				<tbody>
@@ -37,15 +36,12 @@
 
 							<c:if test="${data.quantity !=0}">
 								<td><select class="list" name="${data.item_id}list">
-
-<!-- 								 path="quantity" -->
 										<c:forEach begin="1" end="${data.quantity}" step="1"
 											varStatus="state">
 											<option value="${state.count}">${state.count}</option>
 										</c:forEach>
 								</select></td>
 								<!-- 購入ボタン -->
-
 								<td class="button"><input class="common_button"
 									type="submit" value="buy" name="${data.item_id}"></td>
 							</c:if>

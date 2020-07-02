@@ -1,3 +1,4 @@
+
 package jp.co.schoo.aspect;
 
 import org.aspectj.lang.JoinPoint;
@@ -5,6 +6,10 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
+/**
+ * @author Tomoyo.H
+ *
+ */
 
 /**
  * Java入門 ログイン機能Aspectクラス.
@@ -22,7 +27,7 @@ public class HomeAspect {
 	public void outMsgBefore(JoinPoint point) {
 		System.out.println("■■■■■" + point.toString() + "のBefore処理を実行します. ■■■■■");
 	}
-	
+
 	/**
 	 * コンソールにアドバイスの対象メソッド名を通知します.</br>
 	 * このアドバイスは対象メソッドの実行後に処理されます.

@@ -4,7 +4,12 @@ package jp.co.schoo.model;
 import java.io.Serializable;
 
 /**
- * Java入門 ログイン画面Modelクラス.
+ * @author Tomoyo.H
+ *
+ */
+
+/**
+ * Java入門 ユーザ新規登録画面Modelクラス.
  */
 public class InsertInputModel implements Serializable {
 

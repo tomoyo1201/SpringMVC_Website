@@ -1,5 +1,11 @@
 package jp.co.schoo.model;
-
+/**
+ * @author Tomoyo.H
+ *
+ */
+/**
+ * Java入門 ユーザ新規登録画面Modelクラス.
+ */
 public class InsertOutputModel {
 
 	private static final long serialVersionUID = 1L;

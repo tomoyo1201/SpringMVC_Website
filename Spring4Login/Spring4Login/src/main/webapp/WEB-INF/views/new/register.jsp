@@ -47,6 +47,7 @@
 		</div>
 	</f:form>
 <script>
+		/* 未入力の項目があるとエラーメッセージを表示 */
 		function confirm(){
 		var id = document.getElementById('id').value;
 		var password = document.getElementById('password').value;
@@ -57,58 +58,8 @@
 			  alert('未入力の項目があります。');
 			  	return false;
 		  }else
-			  <%--
-			  if(id ==''){
 
-				  alert('同一idが存在しています');
-				  return false;
 			  }
-			  --%>
+
 
 		  return true;
-/* 			  return false; */
-
-	}
-	</script>
-
-</body>
-</html>
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
-
-Java入門 ログイン画面
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>登録画面</title>
-		<link href="<c:url value="/css/spring.css" />" rel="stylesheet" />
-	</head>
-	<body>
-		<div class="login_pane">
-			<h1>登録画面</h1>
-			<p>${insert.msg}</p>
-			<f:form modelAttribute="insert">
-				<table class="table_form">
-					<tbody>
-						<tr>
-							<th>ログインID</th>
-							<td><f:input path="id"/></td>
-						</tr>
-						<tr>
-							<th>パスワード</th>
-							<td><f:password path="password"/></td>
-						</tr>
-					</tbody>
-				</table>
-				<input class="common_button" type="submit" value="ログイン"/>
-
-			</f:form>
-		<f:form action="new" method="POST">
-			<input class="common_button" type="submit" value="Sign Up">
-		</f:form>
-
-		</div>
-	</body>
-</html> --%>

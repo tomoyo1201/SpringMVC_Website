@@ -14,7 +14,9 @@ import com.mysql.jdbc.PreparedStatement;
 
 import jp.co.schoo.model.PurchaseInputModel;
 import jp.co.schoo.model.PurchaseOutputModel;
-
+/**
+ * Java入門 購入機能DAOクラス.
+ */
 @Repository
 public class PurchaseDao {
 
@@ -40,6 +42,9 @@ public class PurchaseDao {
 			"select history.item_id, item.item_name, history.quantity from history inner join item on history.id = ? and history.item_id = item.item_id";
 
 
+	/**
+	 * 購入画面に表示する情報を取得するメソッド
+	 */
 	public List<Map<String, Object>> itemList(){
 
 		List<Map<String, Object>> itemList = null;	// DB検索結果を格納するリスト
@@ -75,6 +80,9 @@ public class PurchaseDao {
 		return itemList;
 	}
 
+	/**
+	 * 購入ボタンが押された商品idを取得するメソッド
+	 */
 	public List<Map<String, Object>> selectItem(String itemId) throws SQLException {
 
 		List<Map<String, Object>> itemList = null;
@@ -111,7 +119,9 @@ public class PurchaseDao {
 	}
 
 
-
+	/**
+	 * 在庫数をアップデートするメソッド
+	 */
 	public void updateItem(String itemId, int qunatity) throws SQLException {
 
 
@@ -130,7 +140,9 @@ public class PurchaseDao {
 //
 //		return itemList;
 	}
-
+	/**
+	 * 在庫数をアップデートするメソッド
+	 */
 	public void updateHistory(String id, String itemId, int quantity) throws SQLException {
 
 		try {

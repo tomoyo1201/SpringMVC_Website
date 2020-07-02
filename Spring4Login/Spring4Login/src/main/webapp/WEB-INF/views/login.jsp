@@ -26,9 +26,11 @@
 						</tr>
 					</tbody>
 				</table>
+				<!-- ログインボタン -->
 				<input class="common_button" type="submit" value="ログイン"/>
 
 			</f:form>
+		<!-- 新規登録ボタン -->
 		<f:form action="new" method="GET">
 			<input class="common_button" type="submit" value="Sign Up">
 		</f:form>

@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jp.co.schoo.model.HomeOutputModel;
 import jp.co.schoo.repository.HomeDao;
 
+
+/**
+ * Java入門 Header処理機能Controllerクラス
+ */
+
 @Controller
 public class HeaderController {
 
@@ -20,9 +25,8 @@ public class HeaderController {
 
 		String nextpage = "/create/header";	// 戻り値（次画面を示す文字列）
 
-		System.out.println("aaa");
-		String username = header.getName();
-		model.addAttribute("name", username);
+		String username = header.getName(); // headerオブジェクトからnameの値を取りusernameにセットする
+		model.addAttribute("name", username); //nameオブジェクトにusernameの値をセットする。
 
 	return nextpage;
 	}

@@ -90,6 +90,10 @@ public class HomeController {
 	}
 
 
+	/**
+	 * 新規ユーザ登録処理.</br>
+	 * 登録成功時は完了画面(finish.jsp)、失敗時は再度入力を促す
+	 */
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String register(@ModelAttribute InsertInputModel insert, Model model) {
 
@@ -103,104 +107,31 @@ public class HomeController {
 		return nextpage;
 	}
 
-
-	//	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	//	public String example(@ModelAttribute InsertInputModel insert, Model model) {
-	//
-	//		String nextpage = "/new/example";	// 戻り値（次画面を示す文字列）
-	//		InsertInputModel insertModel = new InsertInputModel();
-	//		// ログイン画面に表示するメッセージを設定
-	//		insertModel.setMsg("IDとパスワードを入力してください.");
-	//		// Modelクラスに設定
-	//		model.addAttribute("insert", insertModel);
-	//
-	//
-	//
-	//
-	//		return nextpage;
-	//	}
-
-
+	/**
+	 * 新規ユーザ登録完了処理.</br>
+	 */
 	@RequestMapping(value = "/finish", method = RequestMethod.POST)
 	public String finish(@ModelAttribute InsertInputModel insert, Model model) {
 
 		// 戻り値（次画面を示す文字列）
 		String nextpage = "/finish/finish";
-
-		InsertOutputModel insertoutputModel1 =
-				dao.insertselectUser(insert.getId(), insert.getPassword());
-
-		InsertOutputModel insertoutputModel =
-				dao.insertselectId(insert.getId());
-
-		if(insertoutputModel1 != null) {
-			// ログインに失敗している場合は入力画面用のModelクラスを新たに設定
-			InsertOutputModel insertoutputModel5 = new InsertOutputModel();
-			//ログイン画面に表示するメッセージを設定
-			insertoutputModel5.setMsg("そのユーザーは登録されています");
-			insertoutputModel5.setId(insert.getId());
-			insertoutputModel5.setPassword(insert.getPassword());
-			insertoutputModel5.setName(insert.getName());
-			insertoutputModel5.setAge(insert.getAge());
-			// Modelクラスに設定
-			model.addAttribute("output", insertoutputModel5);
-
-
-		}else
-			if(insertoutputModel !=null){
-
-				InsertInputModel insertinputModel = new InsertInputModel();
-
-				insertinputModel.setMsg("同一ID存在のため、登録できません。");
-				//				insertinputModel.setErr(1);
-
-				model.addAttribute("insert", insertinputModel);
-
-
-
-				nextpage = "/new/register";
-
-			}
-
-			else {
-
-				System.out.println(insert.getId());
-				System.out.println(insert.getPassword());
-				System.out.println(insert.getMsg());
-				InsertOutputModel insertoutputModel4 =
-						dao.insertUser(insert.getId(), insert.getPassword(), insert.getName(), insert.getAge());
-				insertoutputModel4.setMsg("ユーザー登録が完了しました。");
-				// Modelクラスに値を設定
-				//			model.addAttribute("insertoutput", insertoutputModel);
-				// 次画面をユーザ画面に変更
-
-				model.addAttribute("output", insertoutputModel4);
-
-			}
-
-
+		//ユーザーの情報を取得
+		InsertOutputModel insertoutputModel4 = dao.insertUser(insert.getId(), insert.getPassword(), insert.getName(), insert.getAge());
+		insertoutputModel4.setMsg("ユーザー登録が完了しました。");
+		//modelクラスにセット
+		model.addAttribute("output", insertoutputModel4);
 
 		return nextpage;
 	}
 
+	/**
+	 * ログアウト処理.</br>
+	 */
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public void logoutPage(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		HttpSession session = request.getSession();
-
-		session.removeAttribute("login_db");
-		session.removeAttribute("user_db");
+		//ログイン画面に戻る
 		response.sendRedirect("/schoo");
 	}
 
-
-	/*	@RequestMapping(value = "/new", params="example", method = RequestMethod.POST)
-	public String ex(Model model) {
-
-		// 戻り値（次画面を示す文字列）
-
-		return "new/example";
-	}
-
-	 */
 
 }
