@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <sec:http auto-config="true">
+<!--         <sec:intercept-url pattern="/book/list/**" access="ROLE_ADMIN,ROLE_USER"/> -->
+        <sec:intercept-url pattern="/new/admin/**" access="ROLE_ADMIN"/>
+        <sec:form-login login-page="/login.jsp" default-target-url="/book"
+                    authentication-failure-url="/login.jsp?error=true"/>
+        <sec:logout logout-url="/logout" logout-success-url="/login.jsp" />
+        <sec:access-denied-handler error-page="/error.jsp" />
+    </sec:http>
+
+    <sec:authentication-manager>
+        <sec:authentication-provider>
+            <sec:jdbc-user-service data-source-ref="dataSource"/>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+    <bean id="webExpressionHandler"
+        class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+
+</beans>
